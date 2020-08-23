@@ -97,7 +97,7 @@ $(function(){
         
         //1 sec=100 centiseconds
         timeSeconds = Math.floor((timeCounter%6000)/100);
-        timeCentiseconds = (timeCounter&6000)%100;
+        timeCentiseconds = (timeCounter%6000)%100;
         $("#timeminute").text(format(timeMinutes));
         $("#timesecond").text(format(timeSeconds));
         $("#timecentisecond").text(format(timeCentiseconds));
@@ -108,7 +108,7 @@ $(function(){
         
         //1 sec=100 centiseconds
         lapSeconds = Math.floor((lapCounter%6000)/100);
-        lapCentiseconds = (lapCounter&6000)%100;
+        lapCentiseconds = (lapCounter%6000)%100;
         $("#lapminute").text(format(lapMinutes));
         $("#lapsecond").text(format(lapSeconds));
         $("#lapcentisecond").text(format(lapCentiseconds));
