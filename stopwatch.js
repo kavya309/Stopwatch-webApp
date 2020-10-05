@@ -6,7 +6,8 @@ $(function(){
     var action;
     var lapNumber = 0;
     var timeMinutes, timeSeconds, timeCentiseconds, lapMinutes, lapSeconds, lapCentiseconds;
-     
+    
+    
     // On App load show start and lap button
     hideshowButtons("#startButton","#lapButton");
     
@@ -23,29 +24,35 @@ $(function(){
     //click on stopButton
     $("#stopButton").click(function(){
         //show resume and reset buttons
-        hideshowButtons("#resumeButton","#resetButton");  
+        hideshowButtons("#resumeButton","#resetButton");
+        
         //stop counter
-        clearInterval(action);   
+        clearInterval(action);
+        
     });
     
     //click on resumeButton
     $("#resumeButton").click(function(){
         //show stop and lap buttons
-        hideshowButtons("#stopButton","#lapButton"); 
+        hideshowButtons("#stopButton","#lapButton");
+        
         //start counter
-        startAction();   
+        startAction();
+        
     });
     
     //click on resetButton
     $("#resetButton").click(function(){
         //reload the page
-        location.reload();   
+        location.reload();
+        
     });
     
     //click on lapButton
     $("#lapButton").click(function(){
         //if mmode is ON
-        if(mode){  
+        if(mode){
+            
             //stop action
             clearInterval(action);
             //reset lap and print lap details
@@ -53,7 +60,8 @@ $(function(){
             addLap();
             // start action
             startAction();
-        } 
+        }
+        
     });
     
     
@@ -83,20 +91,24 @@ $(function(){
     
     //updateTime converts counters to minutes seconds and centiseconds
     function updateTime(){
-        //1 min=60*100centiseconds 
+        //1 min=60*100centiseconds
+        
         timeMinutes = Math.floor(timeCounter/6000);
+        
         //1 sec=100 centiseconds
         timeSeconds = Math.floor((timeCounter%6000)/100);
-        timeCentiseconds = (timeCounter%6000)%100;
+        timeCentiseconds = (timeCounter&6000)%100;
         $("#timeminute").text(format(timeMinutes));
         $("#timesecond").text(format(timeSeconds));
         $("#timecentisecond").text(format(timeCentiseconds));
         
-        //1 min=60*100centiseconds   
-        lapMinutes = Math.floor(lapCounter/6000); 
+        //1 min=60*100centiseconds
+        
+        lapMinutes = Math.floor(lapCounter/6000);
+        
         //1 sec=100 centiseconds
         lapSeconds = Math.floor((lapCounter%6000)/100);
-        lapCentiseconds = (lapCounter%6000)%100;
+        lapCentiseconds = (lapCounter&6000)%100;
         $("#lapminute").text(format(lapMinutes));
         $("#lapsecond").text(format(lapSeconds));
         $("#lapcentisecond").text(format(lapCentiseconds));
@@ -117,15 +129,15 @@ $(function(){
         lapNumber++;
         var myLapDetails = 
             '<div class="lap">'+
-                   '<div class="laptimetitle">'+
-                       'Lap'+ lapNumber +
-                    </div>'+
-                   '<div class="laptime">' + 
-                        '<span>'+format(lapMinutes) + '</span>' +
-                        ':<span>'+format(lapSeconds) + '</span>' +
-                        ':<span>'+format(lapCentiseconds) + '</span>' 
-                   '</div>'+
-            '</div>';
-            $(myLapDetails).prependTo("#laps");
-        }
-    });
+                    '<div class="laptimetitle">'+
+            'Lap'+ lapNumber +
+            '</div>'+
+            '<div class="laptime">' + 
+            '<span>'+format(lapMinutes) + '</span>' +
+            ':<span>'+format(lapSeconds) + '</span>' +
+            ':<span>'+format(lapCentiseconds) + '</span>' 
+            '</div>'
+        '</div>';
+        $(myLapDetails).prependTo("#laps")
+    }
+});
